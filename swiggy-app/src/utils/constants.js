@@ -1,0 +1,1 @@
+export const SWIGGY_LOGO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0wQaCqfNqSSf5ivSTfLQPx0FbMEBzYQt0bg&s"
