@@ -1,20 +1,18 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../features/auth/authSlice";
+import React from "react"
+import { Section1 } from "./Section1"
+import Body from "./Body"
 
 export function Home(){
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-
-    function handleLogout(){
-        dispatch(logout)
-        navigate("/login")
-    }
+   
     return (
         <>
-        <div>Home</div>
-        <button onClick={handleLogout}>Logout</button>
+       <div >
+        <Section1/>
+        <hr className=" border-t-2 border-gray-300 w-[90%]  m-auto mt-6"/>
+        <Body/>
+       </div>
         </>
     )
 }
+    
+

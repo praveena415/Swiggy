@@ -34,7 +34,7 @@ useEffect(()=>{
     }
 },[user, navigate]);
   return (
-    <>
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
       <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
         <div className="flex justify-center mb-4">{/* swiggy logo */}
              <img className="w-24 h-auto" src={SWIGGY_LOGO} alt="Swiggy Logo" />
@@ -46,14 +46,14 @@ useEffect(()=>{
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 md-4 border border-gray-300 rounded "
+            className="w-full p-2 mb-2 md-4 border border-gray-300 rounded "
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 md-4 border border-gray-300 rounded"
+            className="w-full p-2 mb-2 md-4 border border-gray-300 rounded"
           />
 
           {/* form data errors */}
@@ -67,7 +67,7 @@ useEffect(()=>{
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 export default SignUp;
