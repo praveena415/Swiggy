@@ -1,11 +1,13 @@
 import { Filter, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withRestaurantPromoted } from "./RestaurantCard";
+import { Link } from "react-router-dom";
 
 export default function Body() {
   const [resList, setResList] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [search, setSearch] = useState("");
+  const RestaurantPromoted = withRestaurantPromoted(RestaurantCard)
 
   useEffect(() => {
     fetchData();
@@ -62,11 +64,16 @@ export default function Body() {
             </div>
           </div>
           <div className="w-full md:w-auto">
-            <button className="flex items-center gap-2 bg-white border border-gray-300 font-medium py-3 px-4 rounded-lg" onClick={()=>{
-                const filteredData = resList.filter((ele)=>ele.info.avgRating > 4.4)
-                setFilteredRestaurants(filteredData)
-            }}>
-                <Filter size={16}/>
+            <button
+              className="flex items-center gap-2 bg-white border border-gray-300 font-medium py-3 px-4 rounded-lg"
+              onClick={() => {
+                const filteredData = resList.filter(
+                  (ele) => ele.info.avgRating > 4.4
+                );
+                setFilteredRestaurants(filteredData);
+              }}
+            >
+              <Filter size={16} />
               <span>Top rated restaurants</span>
             </button>
           </div>
@@ -74,16 +81,24 @@ export default function Body() {
 
         {/* restaurants grid */}
 
-        {filteredRestaurants.length === 0 ? (<p>Loading...</p>) : (
-            <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">{filteredRestaurants.length} Restaurants to explore</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-                    {filteredRestaurants.map((ele)=>(
-                        <RestaurantCard res={ele}/>
-                    )) }
-                </div>
+        {filteredRestaurants.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              {filteredRestaurants.length} Restaurants to explore
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+              {filteredRestaurants.map((ele) => (
+                 <Link key = {ele.info.id} to={`restaurant/${ele.info.id}`}
+                  className="block transition duration-300 hover:-translate-y-1 hover:shadow-lg">  
+                 {ele.info.avgRating >= 4.4 ? (
+                  <RestaurantPromoted res={ele} />
+                 ) : (<RestaurantCard res={ele}/>)} 
+                 </Link>        
+              ))}
             </div>
-
+          </div>
         )}
       </div>
     </>
